@@ -6,12 +6,14 @@ const path = require('path');
 const env = process.env.NODE_ENV;
 const devMode = env === 'development';
 
+const deployFolder = './dist';
+
 /* === dont forget to import scss to main.js file === */
 /* ===> import './main.scss'; <=== */
 
 module.exports = {
     output: {
-        path: path.resolve('./dist'),
+        path: path.resolve(deployFolder),
         filename: '[name].[chunkhash].js'
     },
     module: {
@@ -41,6 +43,13 @@ module.exports = {
                         loader: 'css-loader' // translates CSS into CommonJS
                     }, {
                         loader: 'sass-loader' // compiles Sass to CSS
+                    }
+                ]
+            }, {
+                test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
+                use: [
+                    {
+                        loader: 'file-loader'
                     }
                 ]
             }
